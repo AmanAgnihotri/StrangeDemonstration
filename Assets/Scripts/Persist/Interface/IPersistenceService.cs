@@ -2,12 +2,12 @@
 
 namespace Demonstration.Persist
 {
-  public interface IPersistenceService
+  public interface IPersistenceService<T>
   {
     void Delete ();
 
     void Load ();
 
-    void Save (IPerson person);
+    void Save (T type);
   }
 }

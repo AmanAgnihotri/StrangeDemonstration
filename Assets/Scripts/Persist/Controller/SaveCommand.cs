@@ -2,17 +2,17 @@
 
 namespace Demonstration.Persist
 {
-  public class SaveCommand : Command
+  public class SaveCommand<T> : Command
   {
     [Inject]
-    public IPerson Person { get; set; }
+    public T Object { get; set; }
 
     [Inject]
-    public IPersistenceService PersistenceService { get; set; }
+    public IPersistenceService<T> PersistenceService { get; set; }
 
     public override void Execute ()
     {
-      PersistenceService.Save (Person);
+      PersistenceService.Save (Object);
     }
   }
 }

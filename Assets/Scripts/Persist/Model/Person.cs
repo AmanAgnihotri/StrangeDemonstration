@@ -1,6 +1,6 @@
 ﻿namespace Demonstration.Persist
 {
-  public class Person : IPerson
+  public class Person
   {
     public string Name { get; private set; }
 

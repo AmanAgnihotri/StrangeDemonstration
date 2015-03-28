@@ -13,12 +13,12 @@ namespace Demonstration.Persist
     {
       base.mapBindings ();
 
-      injectionBinder.Bind<LoadedSignal> ().ToSingleton ();
-      injectionBinder.Bind<IPersistenceService> ().To<DiskPersistenceService> ().ToSingleton ();
+      injectionBinder.Bind<LoadedSignal<Person>> ().ToSingleton ();
+      injectionBinder.Bind<IPersistenceService<Person>> ().To<DiskPersistenceService<Person>> ().ToSingleton ();
 
-      commandBinder.Bind<DeleteSignal> ().To<DeleteCommand> ().Pooled ();
-      commandBinder.Bind<LoadSignal> ().To<LoadCommand> ().Pooled ();
-      commandBinder.Bind<SaveSignal> ().To<SaveCommand> ().Pooled ();
+      commandBinder.Bind<DeleteSignal<Person>> ().To<DeleteCommand<Person>> ().Pooled ();
+      commandBinder.Bind<LoadSignal<Person>> ().To<LoadCommand<Person>> ().Pooled ();
+      commandBinder.Bind<SaveSignal<Person>> ().To<SaveCommand<Person>> ().Pooled ();
 
       mediationBinder.Bind<PersistView> ().To<PersistMediator> ();
     }

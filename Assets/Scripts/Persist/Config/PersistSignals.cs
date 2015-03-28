@@ -2,19 +2,19 @@
 
 namespace Demonstration.Persist
 {
-  public class DeleteSignal : Signal
+  public class DeleteSignal<T> : Signal
   {
   }
 
-  public class LoadSignal : Signal
+  public class LoadSignal<T> : Signal
   {
   }
 
-  public class SaveSignal : Signal<IPerson>
+  public class SaveSignal<T> : Signal<T>
   {
   }
 
-  public class LoadedSignal : Signal<IPerson>
+  public class LoadedSignal<T> : Signal<T>
   {
   }
 }

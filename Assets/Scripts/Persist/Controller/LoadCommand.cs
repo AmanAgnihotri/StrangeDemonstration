@@ -2,10 +2,10 @@
 
 namespace Demonstration.Persist
 {
-  public class LoadCommand : Command
+  public class LoadCommand<T> : Command
   {
     [Inject]
-    public IPersistenceService PersistenceService { get; set; }
+    public IPersistenceService<T> PersistenceService { get; set; }
 
     public override void Execute ()
     {

@@ -3,37 +3,42 @@ using Newtonsoft.Json;
 
 namespace Demonstration.Persist
 {
-  public class DiskPersistenceService : IPersistenceService
+  public class DiskPersistenceService<T> : IPersistenceService<T>
   {
-    public const string SERVICE_KEY = "Demonstration.Persist.Person";
+    private string Key { get; set; }
 
     [Inject]
-    public LoadedSignal LoadedSignal { get; set; }
+    public LoadedSignal<T> LoadedSignal { get; set; }
+
+    public DiskPersistenceService ()
+    {
+      Key = "Demonstration.Persist." + typeof (T).Name;
+    }
 
     public void Delete ()
     {
-      PlayerPrefs.DeleteKey (SERVICE_KEY);
+      PlayerPrefs.DeleteKey (Key);
     }
 
     public void Load ()
     {
-      var data = PlayerPrefs.GetString (SERVICE_KEY, string.Empty);
+      var data = PlayerPrefs.GetString (Key, string.Empty);
 
       if (!string.IsNullOrEmpty (data))
       {
-        var person = JsonConvert.DeserializeObject<Person> (data);
+        var dataObject = JsonConvert.DeserializeObject<T> (data);
 
-        LoadedSignal.Dispatch (person);
+        LoadedSignal.Dispatch (dataObject);
       }
     }
 
-    public void Save (IPerson person)
+    public void Save (T type)
     {
-      var data = JsonConvert.SerializeObject (person);
+      var data = JsonConvert.SerializeObject (type);
 
       try
       {
-        PlayerPrefs.SetString (SERVICE_KEY, data);
+        PlayerPrefs.SetString (Key, data);
         PlayerPrefs.Save ();
       }
       catch (PlayerPrefsException exception)

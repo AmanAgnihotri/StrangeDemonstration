@@ -8,16 +8,16 @@ namespace Demonstration.Persist
     public PersistView PersistView { get; set; }
 
     [Inject]
-    public DeleteSignal DeleteSignal { get; set; }
+    public DeleteSignal<Person> DeleteSignal { get; set; }
 
     [Inject]
-    public LoadSignal LoadSignal { get; set; }
+    public LoadSignal<Person> LoadSignal { get; set; }
 
     [Inject]
-    public SaveSignal SaveSignal { get; set; }
+    public SaveSignal<Person> SaveSignal { get; set; }
 
     [Inject]
-    public LoadedSignal LoadedSignal { get; set; }
+    public LoadedSignal<Person> LoadedSignal { get; set; }
 
     private Person Person { get; set; }
 
@@ -74,7 +74,7 @@ namespace Demonstration.Persist
       Set (string.Empty, string.Empty);
     }
 
-    private void Loaded (IPerson person)
+    private void Loaded (Person person)
     {
       Set (person.Name, person.Age.ToString ());
     }
